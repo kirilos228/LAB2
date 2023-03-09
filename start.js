@@ -1,6 +1,6 @@
-//start.js
-const app = require('./server.js');
+const app = require("./index");
+const config = require("./config");
 
-app.listen(3000, () => {
-    console.log('Server start at localhost:3000');
+app.listen(config.get('proxy_port'), () => {
+    console.log(`Server running at localhost:${config.get('proxy_port')}`);
 });

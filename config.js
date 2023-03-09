@@ -1,21 +1,20 @@
+require('dotenv').config();
 const convict = require("convict");
+const convict_format_with_validator = require("convict-format-with-validator");
+
+convict.addFormat(convict_format_with_validator.url);
 
 const config = convict({
-    apiUrl:{
-        doc: 'The url application \"api\".',
-        format: String,
-        default: 'http://localhost:3000/',
-        env: 'NODE_URL'
+    api_url: {
+        format: "url",
+        default: "http://localhost:3000",
+        env: "API_URL_ADDRESS"
     },
-    port: {
-        doc: 'The port to bind.', // опис призначення
-        format: 'port',           // формат поля String, ipadress, port, array, url, int, timestamp, *
+    proxy_port: {
+        format: 'port',
         default: 3001,
-        env: 'PORT',                   // назва змінної у файлі .env
-        arg: 'port'
+        env: "PROXY_PORT"
     }
 });
-
-config.validate({ allowed: 'strict' }); // виконувати перевірку параметрів
 
 module.exports = config;
